@@ -17,11 +17,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light.copyWith(
           statusBarColor: const Color.fromRGBO(242, 162, 99, 1),
+          systemNavigationBarDividerColor: Colors.white,
           systemNavigationBarIconBrightness: Brightness.light,
         ),
         child: Scaffold(
           backgroundColor: const Color.fromRGBO(242, 162, 99, 1),
           body: Stack(children: [
+            /**
+             * image
+             * 
+             */
             Padding(
               padding: EdgeInsets.only(
                 top: 10.h,
@@ -36,6 +41,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
               ),
             ),
+
+            /**
+             * 
+             * teks
+             */
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -85,11 +95,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                        * Button Mulai
                        */
                       RoundedButton(context, 
-                      onTap: (){},
+                      onTap: (){
+                        Navigator.pushNamed(context, "/login_screen");
+                      },
                       text: "Mulai", 
+                      fontSize: 18.sp,
                       height_percent: 0.08, 
                       width_percent: 0.9, 
-                      radius: 20,
+                      radius: 20.dm,
                       )
                     ],
                   ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /**
  * @brief Widget Material
@@ -15,6 +14,7 @@ Widget RoundedButton(BuildContext context,
     num height_percent = 0.1,
     num width_percent = 0.8,
     double radius = 10,
+    double? fontSize, 
     Color color = const Color.fromRGBO(242, 162, 99, 1)}) {
   return Container(
     height: MediaQuery.of(context).size.height * height_percent,
@@ -28,7 +28,9 @@ Widget RoundedButton(BuildContext context,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
         color: Colors.transparent,
         child: InkWell(
-          onTap: () => onTap,
+          onTap: () {
+            onTap!();
+          },
           splashColor: Colors.grey,
           hoverColor: Colors.grey,
           child: Center(
@@ -36,7 +38,7 @@ Widget RoundedButton(BuildContext context,
               text!,
               style: TextStyle(
                   fontFamily: "Poppins",
-                  fontSize: 14.sp,
+                  fontSize: fontSize!,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),

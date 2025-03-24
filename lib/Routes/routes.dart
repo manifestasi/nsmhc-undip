@@ -5,6 +5,8 @@ Class untuk route page
 */
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nsmhc/Pages/login_screen.dart';
+import 'package:nsmhc/Pages/register_screen.dart';
 import 'package:nsmhc/Pages/splash_screen.dart';
 import 'package:nsmhc/Pages/welcome_screen.dart';
 
@@ -15,6 +17,10 @@ class Routers {
         return MaterialPageRoute(builder: (_)=> const SplashScreen());
       case "/welcome_screen":
         return MaterialPageRoute(builder: (_)=> const WelcomeScreen());
+      case "/register_screen":
+        return MaterialPageRoute(builder: (_)=> const RegisterScreen());
+      case "/login_screen":
+        return MaterialPageRoute(builder: (_)=> const LoginScreen());
       default:
         return _errorRoute();
     }
