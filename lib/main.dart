@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nsmhc/Pages/splash_screen.dart';
@@ -14,18 +15,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    /*
+     Set agar device tetap dalam keadaan potrait.
+    */
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+        
     return  ScreenUtilInit (
       designSize: const Size(390, 640),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child){
         return GetMaterialApp(
-          title: 'NSMHC',
+          title: 'NSHMHC',
           onGenerateRoute: Routers.generatedRoute,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromRGBO(17, 17, 16, 1.0)
+              seedColor: const Color.fromRGBO(242, 162, 99, 1.0)
               )
           ),
           home: child,
