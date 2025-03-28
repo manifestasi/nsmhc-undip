@@ -3,19 +3,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget TextFieldCustom(
   BuildContext context, {
+  GlobalKey<FormState>? key,  
   num width_percent = 0.8,
   double radius = 10,
   Color? border_color,
+  Color backgroundColor = Colors.white, 
   String? label,
+  TextInputType? type = TextInputType.emailAddress,
   TextEditingController? text_controller,
 }) {
   return Container(
     width: MediaQuery.of(context).size.width * width_percent,
     decoration: BoxDecoration(
+      color: backgroundColor,
       borderRadius: BorderRadius.circular(radius),
       // border: Border.all(color: border_color!)
     ),
     child: TextFormField(
+      key: key,
       controller: text_controller,
       validator: (String? sr) {
         String pattern =
@@ -31,12 +36,12 @@ Widget TextFieldCustom(
 
         return null;
       },
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: type,
       decoration: InputDecoration(
           label: Text(
             label!,
             style: TextStyle(
-                color: const Color.fromRGBO(242, 162, 99, 1.0),
+                color: border_color,
                 fontFamily: "Poppins",
                 fontSize: 18.sp),
           ),

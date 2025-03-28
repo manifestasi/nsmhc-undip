@@ -34,7 +34,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Image.asset(
-                  "assets/images/welcome_logo.png", 
+                  "assets/images/splash_logo.png", 
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: MediaQuery.of(context).size.height * 0.4,
                   fit: BoxFit.cover,

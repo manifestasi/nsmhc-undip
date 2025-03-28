@@ -3,15 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-Widget PasswordFieldCustom(
+Widget PasswordFieldConfirm(
   BuildContext context, {
-  GlobalKey<FormState>? key,
   num width_percent = 0.8,
+  GlobalKey<FormState>? key,
   double radius = 10,
   Color? border_color,
   String? label,
   Rx<bool>? is_visible,
   TextEditingController? text_controller,
+  TextEditingController? paired_text_controller,
 }) {
   return Container(
     width: MediaQuery.of(context).size.width * width_percent,
@@ -24,11 +25,13 @@ Widget PasswordFieldCustom(
       controller: text_controller,
       keyboardType: TextInputType.visiblePassword,
       validator: (String? sr) {
-        if (sr == null || sr.isEmpty || sr.length < 8) {
-          return 'Tidak boleh kosong dan minimal 8 karakter!';
-        }
-        return null;
-      },
+                if (sr == null || sr.isEmpty || sr.length < 8) {
+                  return 'Tidak boleh kosong dan minimal 8 karakter!';
+                }else if(sr != paired_text_controller!.text){
+                  return 'Password tidak sesuai!';
+                }
+                return null;
+              },
       obscureText: !is_visible!.value,
       decoration: InputDecoration(
           suffixIcon: IconButton(

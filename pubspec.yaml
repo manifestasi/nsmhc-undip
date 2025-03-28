@@ -39,7 +39,8 @@ dependencies:
   get: ^4.6.5
   http: ^1.0.0
   lucide_icons: ^0.257.0
-
+  carousel_slider: ^5.0.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +68,13 @@ flutter:
     - assets/images/splash_logo.png
     - assets/images/welcome_logo.png
     - assets/images/register_logo.png
+    - assets/images/foto.jpg
+    - assets/images/bg_home.png
+    - assets/images/ikhlas_logo.png
+    - assets/images/niat_logo.png
+    - assets/images/doa_logo.png
+    - assets/images/detok_logo.png
+    - assets/images/intro_logo.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
