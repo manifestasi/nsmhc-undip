@@ -10,8 +10,9 @@ import 'package:nsmhc/Pages/data_anak_screen.dart';
 import 'package:nsmhc/Pages/data_diri_screen.dart';
 import 'package:nsmhc/Pages/data_suami_screen.dart';
 import 'package:nsmhc/Pages/edit_profile_screen.dart';
-import 'package:nsmhc/Pages/home_screen.dart';
+// import 'package:nsmhc/Pages/home_screen.dart';
 import 'package:nsmhc/Pages/login_screen.dart';
+import 'package:nsmhc/Pages/materi_screen.dart';
 import 'package:nsmhc/Pages/profile_screen.dart';
 import 'package:nsmhc/Pages/register_screen.dart';
 import 'package:nsmhc/Pages/splash_screen.dart';
@@ -40,6 +41,8 @@ class Routers {
         return MaterialPageRoute(builder: (_)=> const DataAnakScreen());
       case "/home_screen":
         return MaterialPageRoute(builder: (_)=> const BottomNav());
+      case "/materi_screen":
+        return MaterialPageRoute(builder: (_)=> const MateriScreen());
       default:
         return _errorRoute();
     }

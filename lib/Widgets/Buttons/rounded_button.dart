@@ -31,7 +31,7 @@ Widget RoundedButton(BuildContext context,
         spreadRadius: 0.02,
         offset: const Offset(0.0, 6.0), // shadow direction: bottom right
       )
-    ],  border: (is_border)? Border.all(color: border_color, width: 4.dm ) : null,
+    ],  border: (is_border)? Border.all(color: border_color, width: 2.dm ) : null,
         color: color, borderRadius: BorderRadius.circular(radius)),
     child: SizedBox(
       height: double.maxFinite,

@@ -23,7 +23,7 @@ Widget DropdownFieldCustom(
       onChanged: onChanged,
       decoration: InputDecoration(
             label: Text(
-              label!,
+              label,
               style: TextStyle(
                   color: border_color,
                   fontFamily: "Poppins",
@@ -31,7 +31,7 @@ Widget DropdownFieldCustom(
             ),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(radius),
-                borderSide: BorderSide(color: border_color!))),
+                borderSide: BorderSide(color: border_color))),
       ),
    ); 
 }

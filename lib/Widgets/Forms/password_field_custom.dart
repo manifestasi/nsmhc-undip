@@ -35,9 +35,9 @@ Widget PasswordFieldCustom(
               iconSize: 18.sp,
               splashColor: Colors.grey,
               onPressed: () {
-                is_visible!.value = !is_visible!.value!;
+                is_visible.value = !is_visible.value;
               },
-              icon: (is_visible!.value! == false)
+              icon: (is_visible.value == false)
                   ? Icon(
                       LucideIcons.eyeOff,
                       size: 15.dm,

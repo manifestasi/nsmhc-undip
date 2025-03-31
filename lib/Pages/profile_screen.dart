@@ -56,7 +56,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
                                 iconSize: 20.dm,
                                 icon: const Icon(
                                   Icons.arrow_back_ios,
@@ -94,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: 80.dm,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50.dm),
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                     image: AssetImage(
                                         "assets/images/foto.jpg"))),
                           ),
@@ -109,7 +111,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 style: TextStyle(
                                     fontFamily: "Poppins",
                                     fontSize: 16.sp,
-                                    color: Color.fromRGBO(255, 236, 206, 1),
+                                    color: const Color.fromRGBO(255, 236, 206, 1),
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
@@ -120,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 style: TextStyle(
                                     fontFamily: "Poppins",
                                     fontSize: 14.sp,
-                                    color: Color.fromRGBO(255, 236, 206, 1),
+                                    color: const Color.fromRGBO(255, 236, 206, 1),
                                     fontWeight: FontWeight.normal),
                               ),
                             ],

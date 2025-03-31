@@ -70,11 +70,22 @@ flutter:
     - assets/images/register_logo.png
     - assets/images/foto.jpg
     - assets/images/bg_home.png
+    - assets/images/bg_materi.png
     - assets/images/ikhlas_logo.png
     - assets/images/niat_logo.png
     - assets/images/doa_logo.png
     - assets/images/detok_logo.png
     - assets/images/intro_logo.png
+    - assets/images/serah_logo.png
+    - assets/images/relaksasi_logo.png
+    - assets/images/body_logo.png
+    - assets/images/niat_materi.png
+    - assets/images/intro_materi.png
+    - assets/images/ikhlas_materi.png
+    - assets/images/serah_materi.png
+    - assets/images/relaksasi_materi.png
+    - assets/images/doa_materi.png
+    - assets/images/detok_materi.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

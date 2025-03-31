@@ -40,4 +40,51 @@ Mindfulness Spiritual fokus pada emosi adalah Latihan fokus mengelola emosi sehi
     "assets/images/doa_logo.png", 
   ];
 
+  static List<String> materi_title ()=> [
+    "Niatkan Agar Lebih Dekat Pada Anak.",
+    "assets/images/intro_logo.png",
+    "assets/images/intro_logo.png", 
+    "assets/images/ikhlas_logo.png", 
+    "assets/images/doa_logo.png", 
+    "assets/images/detok_logo.png", 
+    "assets/images/doa_logo.png", 
+    "assets/images/doa_logo.png", 
+    "assets/images/doa_logo.png", 
+  ];
+
+  static List<String> materi_stage ()=> [
+    """
+1. Niatkan dari hati yang paling dalam bahwa Ibu ingin menjadi orang tua yang mencintai  anaknya\n
+2. Yakin bahwa cinta mampu membahagiakan saya dan orang lain\n
+3. Saya memaafkan kesalahan anak saya\n
+4. Saya ingin menjadi orang tua yang bahagia di dunia dan akhirat\n
+
+
+    """,
+    "assets/images/intro_logo.png",
+    "assets/images/intro_logo.png", 
+    "assets/images/ikhlas_logo.png", 
+    "assets/images/doa_logo.png", 
+    "assets/images/detok_logo.png", 
+    "assets/images/doa_logo.png", 
+    "assets/images/doa_logo.png", 
+    "assets/images/doa_logo.png", 
+  ];
+
+  static List<String> materi_question ()=> [
+    """
+\nApakah Ibu sudah memiliki niat untuk memperbaiki diri?
+
+Jika Ibu sudah berniat, bisa klik lanjut !    
+""",
+    "assets/images/intro_logo.png",
+    "assets/images/intro_logo.png", 
+    "assets/images/ikhlas_logo.png", 
+    "assets/images/doa_logo.png", 
+    "assets/images/detok_logo.png", 
+    "assets/images/doa_logo.png", 
+    "assets/images/doa_logo.png", 
+    "assets/images/doa_logo.png", 
+  ];
+
 }

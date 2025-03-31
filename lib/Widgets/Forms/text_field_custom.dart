@@ -29,7 +29,7 @@ Widget TextFieldCustom(
         if (!regex.hasMatch(sr!) && label == "Email") {
           return 'Masukkan alamat email yang valid!';
         } else {
-          if (sr == null || sr.isEmpty) {
+          if (sr.isEmpty) {
             return 'Tidak boleh kosong!';
           }
         }

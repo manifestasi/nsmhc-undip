@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nsmhc/Utils/home_clip_path.dart';
 import 'package:nsmhc/Utils/text_utils.dart';
 import 'package:nsmhc/Widgets/Buttons/rounded_button.dart';
 import 'package:nsmhc/Widgets/Card/banner_home.dart';
@@ -65,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left:20.w, bottom: 15.h),
+                            padding: EdgeInsets.only(left:30.w, bottom: 15.h),
                             child: Text("Tahapan", style: TextStyle(
                               fontFamily: "Poppins",
                               fontSize: 18.sp, 
@@ -138,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               is_border: true,
                               onTap: () {
-                                Navigator.pushNamed(context, "/profile_screen");
+                                Navigator.pushNamed(context, "/materi_screen");
                               },
                               text: "Mulai",
                               shadow_color: Color.fromARGB(255, 159, 158, 158),
