@@ -40,7 +40,8 @@ dependencies:
   http: ^1.0.0
   lucide_icons: ^0.257.0
   carousel_slider: ^5.0.0
-  
+  audioplayers: ^5.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -79,6 +80,7 @@ flutter:
     - assets/images/serah_logo.png
     - assets/images/relaksasi_logo.png
     - assets/images/body_logo.png
+    - assets/images/body_materi.png
     - assets/images/niat_materi.png
     - assets/images/intro_materi.png
     - assets/images/ikhlas_materi.png
@@ -86,6 +88,24 @@ flutter:
     - assets/images/relaksasi_materi.png
     - assets/images/doa_materi.png
     - assets/images/detok_materi.png
+    - assets/images/pusing_logo.png
+    - assets/images/gemetar_logo.png
+    - assets/images/kesemutan_logo.png
+    - assets/images/lain_logo.png
+    - assets/images/mual_logo.png
+    - assets/images/nyeri_logo.png
+    - assets/images/pundak_logo.png
+    - assets/images/sesak_logo.png
+
+    #audio
+    - assets/
+    - assets/audio/1.wav
+    - assets/audio/2.wav
+    - assets/audio/3.wav
+    - assets/audio/4.wav
+    - assets/audio/5.wav
+    - assets/audio/kartu_tidak_terdaftar.mp3
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
