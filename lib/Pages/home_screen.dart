@@ -24,6 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   var _materiController = Get.put(MateriController());
   var _prefController = Get.put(PrefController());
 
+  int? last_stage;
+
   Future<void> saveTrack() async {
     if (_contentController.is_tracked!.value == false) {
       await _contentController.saveTrack().then((value) {
@@ -33,10 +35,17 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future<dynamic> load_pref() async {
+     var d = await _prefController.getStage();
+     last_stage = d;
+     log("stage terakhir : $d");
+     return d;
+  }
+
 
   @override
   void initState() {
-    log("stage : ${_prefController.getData("stage")}");
+    load_pref();
     saveTrack();
     _materiController.stopAudio();
     _materiController.playAudio("audio/home.wav");
@@ -169,23 +178,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 SizedBox(height: 20.h),
                                 RoundedButton(
-                                  context,
-                                  is_border: true,
-                                  onTap: () {
-                                    _materiController.stopAudio();
-                                    Navigator.pushNamed(
-                                        context, "/materi_screen");
-                                  },
-                                  text: "Mulai",
-                                  shadow_color:
-                                      Color.fromARGB(255, 159, 158, 158),
-                                  color:
-                                      const Color.fromRGBO(242, 162, 99, 1.0),
-                                  fontSize: 18.sp,
-                                  height_percent: 0.08,
-                                  width_percent: 0.9,
-                                  radius: 20.dm,
-                                ),
+                                    context,
+                                    is_border: true,
+                                    onTap: () async{
+                                      // load_pref();
+                                      _materiController.stopAudio();
+                                      if(last_stage != null){
+                                          if(last_stage != 11){
+                                              _materiController.number_stage.value = last_stage!;
+                                              log("stage ke materi ${_materiController.number_stage.value}");
+                                          }
+                                      }
+                                      Navigator.pushNamed(
+                                          context, "/materi_screen");
+                                    },
+                                    text: "Mulai",
+                                    shadow_color:
+                                        Color.fromARGB(255, 159, 158, 158),
+                                    color:
+                                        const Color.fromRGBO(242, 162, 99, 1.0),
+                                    fontSize: 18.sp,
+                                    height_percent: 0.08,
+                                    width_percent: 0.9,
+                                    radius: 20.dm,
+                                  ),
                               ],
                             ),
                           ),

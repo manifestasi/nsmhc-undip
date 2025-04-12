@@ -19,10 +19,23 @@ class PrefController extends GetxController {
     return prefs.getString(data);
   }
 
+ 
+
   Future<void> saveData(Map<String, dynamic> data) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', data['token']);
   }
+
+  Future<void> saveStage(int data) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt("stage", data);
+  }
+
+  dynamic getStage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt("stage");
+  }
+
 
   Future<bool> clearData() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();

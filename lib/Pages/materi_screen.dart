@@ -44,20 +44,25 @@ class _MateriScreenState extends State<MateriScreen> {
   var _is_audio_played = false.obs;
   RxBool? is_pressed = false.obs;
   RxBool? checked = false.obs;
+  RxBool? is_last = false.obs;
   RxList<RxBool> selected_mandiri = [false.obs, false.obs, false.obs].obs;
 
   @override
   void initState() {
-    _materiController.playAudio(
-        TextUtilsData.audio_path()[_materiController.number_stage.value]);
+    if (selected_mandiri[0].value == false) {
+      _materiController.playAudio(
+          TextUtilsData.audio_path()[_materiController.number_stage.value]);
+      log("iki dudu sih haaaah");
+    }
+
     super.initState();
   }
 
-  @override
-  void dispose() {
-    _materiController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _materiController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +75,7 @@ class _MateriScreenState extends State<MateriScreen> {
         /**
          * ketika kembali, audio berhenti
          */
-        _prefController
-            .saveData({"stage": _materiController.number_stage.value});
+
         _materiController.stopAudio();
 
         // _is_audio_played.value = false;
@@ -81,6 +85,12 @@ class _MateriScreenState extends State<MateriScreen> {
         _materiController.set_target_mandiri(1, 2.obs);
         _materiController.set_target_mandiri(2, 2.obs);
         _materiController.set_target_mandiri(3, 2.obs);
+        await _prefController
+            .saveStage(_materiController.number_stage.value)
+            .then((value) {
+          Navigator.pushReplacementNamed(context, "/home_screen");
+        });
+
         return true;
       },
       child: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -941,6 +951,7 @@ class _MateriScreenState extends State<MateriScreen> {
                                                         is_pressed!.value =
                                                             true;
                                                         log("Number stage ${_materiController.number_stage.value}");
+
                                                         if (_materiController
                                                                     .number_stage
                                                                     .value ==
@@ -955,6 +966,13 @@ class _MateriScreenState extends State<MateriScreen> {
                                                               .number_stage
                                                               .value++;
                                                         }
+
+                                                        await _prefController
+                                                            .saveStage(
+                                                                _materiController
+                                                                        .number_stage
+                                                                        .value +
+                                                                    1);
 
                                                         /**
                                                  * Save Body Scan Reaction
@@ -1027,47 +1045,49 @@ class _MateriScreenState extends State<MateriScreen> {
                                                                     _materiController
                                                                         .number_stage
                                                                         .value--;
-                                                                    await _prefController
-                                                                        .saveData({
-                                                                      "stage": _materiController
-                                                                          .number_stage
-                                                                          .value
-                                                                    }).then((value) {
-                                                                      Navigator.pushReplacementNamed(
-                                                                          context,
-                                                                          "/home_screen");
-                                                                    });
+                                                                    // await _prefController
+                                                                    //     .saveStage(_materiController
+                                                                    //       .number_stage
+                                                                    //       .value + 1).then((value) {
+                                                                    //   Navigator.pushReplacementNamed(
+                                                                    //       context,
+                                                                    //       "/home_screen");
+                                                                    // });
+                                                                    Navigator.pushReplacementNamed(
+                                                                        context,
+                                                                        "/home_screen");
                                                                   }
                                                                 });
                                                               } else {
                                                                 _materiController
                                                                     .number_stage
                                                                     .value--;
-                                                                await _prefController
-                                                                    .saveData({
-                                                                  "stage":
-                                                                      _materiController
-                                                                          .number_stage
-                                                                          .value
-                                                                }).then((value) {
-                                                                  ScaffoldMessenger.of(
-                                                                          context)
-                                                                      .showSnackBar(
-                                                                          SnackBar(
-                                                                              content: Text(
-                                                                    "Progress tidak tersimpan! Periksa Koneksi Anda.",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontFamily:
-                                                                          "Poppins",
-                                                                      fontSize:
-                                                                          12.sp,
-                                                                    ),
-                                                                  )));
-                                                                  Navigator.pushReplacementNamed(
-                                                                      context,
-                                                                      "/home_screen");
-                                                                });
+                                                                // await _prefController
+                                                                //     .saveStage(
+                                                                //       _materiController
+                                                                //           .number_stage
+                                                                //           .value + 1).then((value) {
+
+                                                                // });
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                        SnackBar(
+                                                                            content:
+                                                                                Text(
+                                                                  "Progress tidak tersimpan! Periksa Koneksi Anda.",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontFamily:
+                                                                        "Poppins",
+                                                                    fontSize:
+                                                                        12.sp,
+                                                                  ),
+                                                                )));
+                                                                Navigator
+                                                                    .pushReplacementNamed(
+                                                                        context,
+                                                                        "/home_screen");
                                                               }
                                                             });
                                                           }
@@ -1088,6 +1108,11 @@ class _MateriScreenState extends State<MateriScreen> {
                                                                           2]
                                                                       .value ==
                                                                   true) {
+                                                            // log("kudune iki stop ii");
+                                                            // _materiController.stopAudio();
+                                                            is_last!.value =
+                                                                true;
+
                                                             /**
                                                      * simpan progress QA (stage terakhir);
                                                      */
@@ -1126,45 +1151,47 @@ class _MateriScreenState extends State<MateriScreen> {
                                                                             2]
                                                                         .value =
                                                                     false;
-                                                                _materiController.stopAudio();
-                                                                ApresiasiPop(context);
-                                                              
 
-                                                               
+                                                                // _materiController
+                                                                //     .number_stage
+                                                                //     .value = 12;
+                                                                ApresiasiPop(
+                                                                    context);
                                                               } else {
                                                                 _materiController
                                                                     .number_stage
                                                                     .value = 10;
 
-                                                                await _prefController
-                                                                    .saveData({
-                                                                  "stage":
-                                                                      _materiController
-                                                                          .number_stage
-                                                                          .value
-                                                                }).then((value) {
-                                                                  is_pressed!
-                                                                          .value =
-                                                                      false;
-                                                                  Navigator.pushReplacementNamed(
-                                                                          context,
-                                                                          "/home_screen")
-                                                                      .then(
-                                                                          (value) {
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .showSnackBar(SnackBar(
-                                                                            content: Text(
-                                                                      "Progress Target Mandiri tidak tersimpan!",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontFamily:
-                                                                            "Poppins",
-                                                                        fontSize:
-                                                                            12.sp,
-                                                                      ),
-                                                                    )));
-                                                                  });
+                                                                // await _prefController
+                                                                //     .saveStage(
+                                                                //       _materiController
+                                                                //           .number_stage
+                                                                //           .value + 1).then((value) {
+
+                                                                //   });
+
+                                                                is_pressed!
+                                                                        .value =
+                                                                    false;
+                                                                Navigator.pushReplacementNamed(
+                                                                        context,
+                                                                        "/home_screen")
+                                                                    .then(
+                                                                        (value) {
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                          SnackBar(
+                                                                              content: Text(
+                                                                    "Progress Target Mandiri tidak tersimpan!",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontFamily:
+                                                                          "Poppins",
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                    ),
+                                                                  )));
                                                                 });
                                                               }
 
@@ -1280,26 +1307,29 @@ class _MateriScreenState extends State<MateriScreen> {
                                                               _materiController
                                                                   .number_stage
                                                                   .value--;
-                                                              await _prefController
-                                                                  .saveData({
-                                                                "stage":
-                                                                    _materiController
-                                                                        .number_stage
-                                                                        .value
-                                                              }).then((value) {
-                                                                Navigator
-                                                                    .pushReplacementNamed(
-                                                                        context,
-                                                                        "/home_screen");
-                                                              });
+
+                                                              //   await _prefController
+                                                              // .saveStage(
+                                                              //     _materiController
+                                                              //         .number_stage
+                                                              //         .value + 1).then((value) {
+
+                                                              //         });
+                                                              Navigator
+                                                                  .pushReplacementNamed(
+                                                                      context,
+                                                                      "/home_screen");
                                                             }
                                                           });
                                                         }
 
                                                         if (_materiController
-                                                                .number_stage
-                                                                .value <
-                                                            11) {
+                                                                    .number_stage
+                                                                    .value <
+                                                                11 &&
+                                                            is_last!.value ==
+                                                                false) {
+                                                          log("last : ${is_last!.value}");
                                                           _materiController.playAudio(
                                                               TextUtilsData
                                                                       .audio_path()[
@@ -1307,6 +1337,12 @@ class _MateriScreenState extends State<MateriScreen> {
                                                                       .number_stage
                                                                       .value]);
                                                         }
+
+                                                        // await _prefController
+                                                        //     .saveStage(
+                                                        //         _materiController
+                                                        //             .number_stage
+                                                        //             .value + 1);
                                                       },
                                                       text: (_materiController
                                                                   .number_stage

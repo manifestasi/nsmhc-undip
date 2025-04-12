@@ -244,6 +244,6 @@ Jika Anda memiliki pertanyaan atau membutuhkan bantuan, silakan hubungi:Email: s
 
 """;
 
- static String apresiasi () => """Terima kasih atas partisipasi dan waktu Ibu dalam mengikuti materi dan mengisi kuisioner ini. Setiap Jawaban Sangat berharga untuk mengingkatkan kualitas materi dan pengalaman pembelajaran"""; 
+ static String apresiasi () => """Terima kasih atas partisipasi dan waktu Ibu dalam mengikuti materi dan mengisi kuisioner ini. Setiap Jawaban Sangat berharga untuk meningkatkan kualitas materi dan pengalaman pembelajaran"""; 
 
 }

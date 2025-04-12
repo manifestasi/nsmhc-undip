@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:nsmhc/Controller/materi_controller.dart';
+import 'package:nsmhc/Controller/pref_controller.dart';
 import 'package:nsmhc/Utils/text_utils.dart';
 import 'package:nsmhc/Widgets/Buttons/rounded_button.dart';
 
@@ -7,6 +10,9 @@ import 'package:nsmhc/Widgets/Buttons/rounded_button.dart';
  * untuk alert dialog
  * 
  */
+
+MateriController _materiController = Get.put(MateriController());
+var _prefController = Get.put(PrefController());
 
 Future<dynamic> ApresiasiPop(BuildContext context,
     {Widget? icon,
@@ -58,7 +64,9 @@ Future<dynamic> ApresiasiPop(BuildContext context,
                   RoundedButton(
                     context,
                     onTap: () async {
-                      Navigator.pushReplacementNamed(context, "/home_screen");
+                      await _prefController.saveStage(0).then((value) {
+                        Navigator.pushReplacementNamed(context, "/home_screen");
+                      });
                     },
                     text: "Selesai",
                     fontSize: 18.sp,
