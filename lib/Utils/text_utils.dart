@@ -30,17 +30,18 @@ Mindfulness Spiritual fokus pada emosi adalah Latihan fokus mengelola emosi sehi
   static List<String> banner_images() => [
         "assets/images/niat_logo.png",
         "assets/images/intro_logo.png",
-        "assets/images/intro_logo.png",
+        "assets/images/penyesalan_logo.png",
         "assets/images/ikhlas_logo.png",
         "assets/images/doa_logo.png",
-        "assets/images/detok_logo.png",
-        "assets/images/doa_logo.png",
-        "assets/images/doa_logo.png",
-        "assets/images/doa_logo.png",
+        "assets/images/body_banner.png",
+        "assets/images/detok_banner.png",
+        "assets/images/relak_banner.png",
+        "assets/images/serah_banner.png",
         "",
       ];
 
   static List<String> materi_title() => [
+        "Mindfulness Spiritual Fokus Pada Emosi",
         "Niatkan Agar Lebih Dekat Pada Anak.",
         "Mengakui dengan penuh kesadaran tentang kesalahan-kesalahan terhadap anak.",
         "Penyesalan yang tulus membuka jalan bagi perbaikan diri dan hubungan yang lebih baik dengan anak.",
@@ -55,6 +56,7 @@ Mindfulness Spiritual fokus pada emosi adalah Latihan fokus mengelola emosi sehi
       ];
 
   static List<List<String>> materi_stage() => [
+        [],
         [
           "Niatkan dari hati yang paling dalam bahwa Ibu ingin menjadi orang tua yang mencintai anaknya.",
           "Yakin bahwa cinta mampu membahagiakan saya dan orang lain.",
@@ -63,8 +65,8 @@ Mindfulness Spiritual fokus pada emosi adalah Latihan fokus mengelola emosi sehi
         ],
         [
           "Kesalahan dalam berpikir negatif",
-          "Kesalahan karena emosi dan marah,"
-              "Kesalahan sulit memaafkan",
+          "Kesalahan karena emosi dan marah",
+          "Kesalahan sulit memaafkan",
           "Mengeluarkan kata-kata yang menyakitkan bagi anak",
           "Kesalahan membandingkan anak",
           "Kesalahan pernah memukul anak",
@@ -105,6 +107,8 @@ Mindfulness Spiritual fokus pada emosi adalah Latihan fokus mengelola emosi sehi
       ];
 
   static List<String> materi_question() => [
+        "\nApakah sudah siap ?\n\nSilahkan klik lanjut !",
+        
         """
 \nApakah Ibu sudah memiliki niat untuk memperbaiki diri?
 
@@ -152,8 +156,9 @@ Jika sudah bisa, Ibu bisa klik lanjut !
 
   static List<String> materi_images() => [
         "assets/images/niat_materi.png",
+        "assets/images/niat_materi.png",
         "assets/images/intro_materi.png",
-        "assets/images/intro_materi.png",
+        "assets/images/penyesalan.png",
         "assets/images/ikhlas_materi.png",
         "assets/images/doa_materi.png",
         "assets/images/body_materi.png",
@@ -164,6 +169,7 @@ Jika sudah bisa, Ibu bisa klik lanjut !
       ];
 
   static List<String> materi_labels() => [
+        "Persiapan Latihan",
         "Niat",
         "Intropeksi Diri",
         "Penyesalan (Tobat)",
@@ -182,11 +188,62 @@ Jika sudah bisa, Ibu bisa klik lanjut !
         "Apakah Ibu mampu mendoakan anaknya setiap saat?",
       ];
 
+  static List<String> persiapan_stage() => [
+    "Posisikan tubuh senyaman mungkin (bisa dengan duduk atau tidur terlentang)",
+    "Mata dalam keadaan fokus dan terbuka",
+    "Munculkan gambaran diri anda, seolah-olah sedang melihat diri sendiri dan mengoreksi diri",
+    "Lakukan relaksasi dengan tarik napas dalam secara sempurna sampai betul-betul rileks"
+    ];
+
   static List<String> audio_path() => [
-        "audio/1.wav",
-        "audio/2.wav",
-        "audio/3.wav",
-        "audio/4.wav",
-        "audio/5.wav",
+        "audio/persiapan.wav",
+        "audio/niat.wav",
+        "audio/introspeksi.wav",
+        "audio/penyesalan.wav",
+        "audio/ikhlas.wav",
+        "audio/doa.wav",
+        "audio/body.wav",
+        "audio/detok.wav",
+        "audio/relaksasi.wav",
+        "audio/berserah.wav",
+        "audio/mandiri.wav"
       ];
+
+ static List<String> pendidikan_items() => [
+    "Tidak Sekolah",
+    "SD/Sederajat",
+    "SMP/Sederajat",
+    "SMA/Sederajat",
+    "Perguruan Tinggi(D3, D4, S1, S2, S3)"
+ ];
+
+ static List<String> pekerjaan_items() => [
+    "Tidak Bekerja",
+    "Pegawai Negeri",
+    "Karyawan Swasta",
+    "Wiraswasta",
+    "Pekerja Lepas/Freelancer"
+ ]; 
+
+ static String lisensi () => """
+Nama Aplikasi: EduSmart – Aplikasi Pembelajaran InteraktifVersi: 1.5.3Pengembang: PT EduTech IndonesiaHak Cipta: © 2025 PT EduTech Indonesia. Seluruh hak cipta dilindungi undang-undang.
+1. Hak Penggunaan
+Aplikasi ini dilisensikan kepada pengguna, bukan dijual. Dengan mengunduh dan menggunakan aplikasi ini, Anda diberikan lisensi terbatas, non-eksklusif, dan tidak dapat dialihkan untuk menggunakan aplikasi sesuai dengan ketentuan berikut:
+Hanya untuk keperluan pribadi dan non-komersial.
+Dilarang menyalin, memodifikasi, atau mendistribusikan aplikasi tanpa izin tertulis dari pengembang.
+2. Syarat & Ketentuan Penggunaan
+Pengguna setuju untuk tidak menyalahgunakan aplikasi ini untuk tujuan ilegal.
+Aplikasi dapat mengumpulkan data penggunaan secara anonim untuk peningkatan layanan.
+PT EduTech Indonesia tidak bertanggung jawab atas kerusakan akibat penggunaan aplikasi di luar ketentuan.
+3. Hak Kekayaan Intelektual
+Semua konten, termasuk teks, grafik, logo, dan materi pembelajaran dalam aplikasi ini, dilindungi oleh hak cipta dan hak merek dagang yang dimiliki oleh PT EduTech Indonesia atau pemberi lisensinya.
+4. Pembaruan & Perubahan Lisensi
+Pengembang berhak memperbarui atau mengubah lisensi ini sewaktu-waktu. Pengguna disarankan untuk selalu membaca kebijakan terbaru yang tersedia di aplikasi.
+5. Kontak & Dukungan
+Jika Anda memiliki pertanyaan atau membutuhkan bantuan, silakan hubungi:Email: support@edusmart.comTelepon: +62 21 1234 5678
+
+""";
+
+ static String apresiasi () => """Terima kasih atas partisipasi dan waktu Ibu dalam mengikuti materi dan mengisi kuisioner ini. Setiap Jawaban Sangat berharga untuk mengingkatkan kualitas materi dan pengalaman pembelajaran"""; 
+
 }

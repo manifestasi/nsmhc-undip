@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:nsmhc/Controller/pref_controller.dart';
+import 'package:nsmhc/Controller/profile_controller.dart';
 import 'package:nsmhc/Widgets/Buttons/rounded_icon_button.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -12,6 +15,28 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  
+   var _prefController = Get.put(PrefController());
+  var _profileController = Get.put(ProfileController());
+
+  // Future<void> get_profile()async{
+  //   await _profileController.getProfile();
+  // }
+
+  // @override
+  // void initState() {
+  //   get_profile();
+  //   super.initState();
+  // }
+
+  @override
+  void dispose() {
+    _profileController.dispose();
+    _prefController.dispose();
+    super.dispose();
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -43,8 +68,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           offset: Offset(
                               2.0, 2.0), // shadow direction: bottom right
                         )
-                      ]
-                      ),
+                      ]),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 30.h, left: 20.w),
@@ -56,7 +80,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
                                 iconSize: 20.dm,
                                 icon: const Icon(
                                   Icons.arrow_back_ios,
@@ -88,42 +114,67 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                       Row(
                         children: [
-                          Container(
-                            height: 80.dm,
-                            width: 80.dm,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50.dm),
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/foto.jpg"))),
-                          ),
+                          Obx(() {
+                            return 
+                            (_profileController.status!.value == false || _profileController.data_user!.data!.foto == null)
+                            // (_profileController.status!.value == true)
+                                ? Container(
+                                    height: 80.dm,
+                                    width: 80.dm,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(50.dm),
+                                        image: const DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/foto.png"))),
+                                  )
+                                : 
+                                ClipOval(
+                                    child: Image.network(
+                                      _profileController.data_user!.data!.foto!,
+                                      height: 80.dm,
+                                      width: 80.dm,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  );
+                          }),
                           SizedBox(
                             width: 10.w,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Bento",
-                                style: TextStyle(
-                                    fontFamily: "Poppins",
-                                    fontSize: 16.sp,
-                                    color: Color.fromRGBO(255, 236, 206, 1),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                              Text(
-                                "Bento@gmail.com",
-                                style: TextStyle(
-                                    fontFamily: "Poppins",
-                                    fontSize: 14.sp,
-                                    color: Color.fromRGBO(255, 236, 206, 1),
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ],
-                          ),
+                                                    Obx(() {
+                            return (_profileController.status!.value == false)
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+
+                                : Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        _profileController.data_user!.data!.name!,
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: 16.sp,
+                                            color: const Color.fromRGBO(
+                                                255, 236, 206, 1),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      Text(
+                                        _profileController.data_user!.data!.email!,
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: 14.sp,
+                                            color: const Color.fromRGBO(
+                                                255, 236, 206, 1),
+                                            fontWeight: FontWeight.normal),
+                                      ),
+                                    ],
+                                  );
+                          })
                         ],
                       ),
                     ],
@@ -153,7 +204,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        
                         RoundedIconButton(
                           context,
                           onTap: () {

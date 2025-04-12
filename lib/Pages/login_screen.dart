@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:nsmhc/Controller/auth_controller.dart';
+import 'package:nsmhc/Widgets/Alerts/dialog_pop.dart';
 import 'package:nsmhc/Widgets/Buttons/rounded_button.dart';
 import 'package:nsmhc/Widgets/Forms/password_field_custom.dart';
 import 'package:nsmhc/Widgets/Forms/text_field_custom.dart';
@@ -13,9 +15,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   Rx<bool> is_visible_password = Rx<bool>(false);
   GlobalKey<FormState> global_key = GlobalKey<FormState>();
+
+  var _authController = Get.put(AuthController());
+  RxBool? is_pressed = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
            */
             Padding(
               padding: EdgeInsets.only(
-                top: 30.h,
+                top: 40.h,
               ),
               child: Align(
                 alignment: Alignment.topCenter,
@@ -84,35 +88,39 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             height: 40.h,
                           ),
-                    
+
                           /**
                            * 
                            * Form Email
                            */
-                    
+
                           TextFieldCustom(context,
+                              text_controller: _authController.emailController,
                               label: "Email",
-                              border_color: const Color.fromRGBO(93, 68, 106, 1),
+                              border_color:
+                                  const Color.fromRGBO(93, 68, 106, 1),
                               radius: 40.dm,
                               width_percent: 0.9),
                           SizedBox(
                             height: 20.h,
                           ),
-                    
+
                           /**
                            * 
                            * Form Password
                            */
                           Obx(() => PasswordFieldCustom(context,
                               label: "Kata Sandi",
-                              border_color: const Color.fromRGBO(93, 68, 106, 1),
+                              border_color:
+                                  const Color.fromRGBO(93, 68, 106, 1),
                               radius: 40.dm,
                               width_percent: 0.9,
+                              text_controller: _authController.passController,
                               is_visible: is_visible_password)),
                           SizedBox(
                             height: 20.h,
                           ),
-                    
+
                           /**
                            * Button Mulai
                            */
@@ -122,23 +130,66 @@ class _LoginScreenState extends State<LoginScreen> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                RoundedButton(
-                                  context,
-                                  onTap: () {
-                                    Navigator.pushNamed(context, "/home_screen");
-                                  },
-                                  text: "Masuk",
-                                  fontSize: 18.sp,
-                                  height_percent: 0.08,
-                                  width_percent: 0.9,
-                                  radius: 40.dm,
-                                ),
-                    
+                                Obx(() {
+                                  return (is_pressed!.value)
+                                      ? const CircularProgressIndicator(
+                                          color:
+                                              Color.fromRGBO(242, 162, 99, 1),
+                                        )
+                                      : RoundedButton(
+                                          context,
+                                          onTap: () async {
+                                            if (global_key.currentState!
+                                                    .validate() ==
+                                                false) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                "Field tidak boleh kosong atau salah",
+                                                style: TextStyle(
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 12.sp,
+                                                ),
+                                              )));
+                                            } else {
+                                              // Navigator.pushNamed(
+                                              //   context, "/profile_screen");
+
+                                              is_pressed!.value = true;
+                                              await _authController
+                                                  .login()
+                                                  .then((value) {
+                                                is_pressed!.value = false;
+                                                if (value) {
+                                                  DialogPop(context,
+                                                      label: "Berhasil Login!");
+                                                
+                                                Navigator.pushReplacementNamed(
+                                                context, "/home_screen");    
+                                                
+                                                } else {
+                                                  DialogPop(context,
+                                                      label: "Gagal Login!",
+                                                      is_good: false);
+                                                }
+                                              });
+                                            }
+
+                                            
+                                          },
+                                          text: "Masuk",
+                                          fontSize: 18.sp,
+                                          height_percent: 0.08,
+                                          width_percent: 0.9,
+                                          radius: 40.dm,
+                                        );
+                                }),
+
                                 /**
                              * Text belum punya akun
                              * 
                              */
-                    
+
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [

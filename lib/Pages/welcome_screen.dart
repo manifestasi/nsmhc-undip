@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:nsmhc/Controller/materi_controller.dart';
 import 'package:nsmhc/Utils/text_utils.dart';
 import 'package:nsmhc/Widgets/Buttons/rounded_button.dart';
 
@@ -12,6 +14,16 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+
+  var _materiController = Get.put(MateriController());
+
+  @override
+  void initState() {
+    super.initState();
+    _materiController.playAudio("audio/welcome.wav");
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -96,6 +108,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                        */
                       RoundedButton(context, 
                       onTap: (){
+                        _materiController.stopAudio();
                         Navigator.pushNamed(context, "/login_screen");
                       },
                       text: "Mulai", 

@@ -5,6 +5,7 @@ Widget DropdownFieldCustom(
     BuildContext context, {
         required List<DropdownMenuItem<String>>? items, 
         required void Function(String?)? onChanged,
+        String? value,
         required double radius,
         required String label,
         Color backgroundColor = Colors.white,
@@ -19,6 +20,7 @@ Widget DropdownFieldCustom(
     ),
      width: MediaQuery.of(context).size.width * width_percent,   
      child: DropdownButtonFormField(
+      value: value,
       items: items,
       onChanged: onChanged,
       decoration: InputDecoration(

@@ -41,7 +41,9 @@ dependencies:
   lucide_icons: ^0.257.0
   carousel_slider: ^5.0.0
   audioplayers: ^5.2.1
-
+  shared_preferences: ^2.2.2
+  image_picker: ^1.0.7
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,10 +72,13 @@ flutter:
     - assets/images/welcome_logo.png
     - assets/images/register_logo.png
     - assets/images/foto.jpg
+    - assets/images/foto.png
     - assets/images/bg_home.png
     - assets/images/bg_materi.png
     - assets/images/ikhlas_logo.png
     - assets/images/niat_logo.png
+    - assets/images/penyesalan.png
+    - assets/images/penyesalan_logo.png
     - assets/images/doa_logo.png
     - assets/images/detok_logo.png
     - assets/images/intro_logo.png
@@ -96,15 +101,27 @@ flutter:
     - assets/images/nyeri_logo.png
     - assets/images/pundak_logo.png
     - assets/images/sesak_logo.png
+    - assets/images/serah_banner.png
+    - assets/images/detok_banner.png
+    - assets/images/body_banner.png
+    - assets/images/relak_banner.png
+    - assets/images/tt.gif
 
     #audio
     - assets/
-    - assets/audio/1.wav
-    - assets/audio/2.wav
-    - assets/audio/3.wav
-    - assets/audio/4.wav
-    - assets/audio/5.wav
-    - assets/audio/kartu_tidak_terdaftar.mp3
+    - assets/audio/niat.wav
+    - assets/audio/introspeksi.wav
+    - assets/audio/penyesalan.wav
+    - assets/audio/ikhlas.wav
+    - assets/audio/doa.wav
+    - assets/audio/body.wav
+    - assets/audio/detok.wav
+    - assets/audio/relaksasi.wav
+    - assets/audio/berserah.wav
+    - assets/audio/welcome.wav
+    - assets/audio/home.wav
+    - assets/audio/mandiri.wav
+    - assets/audio/persiapan.wav
 
   #   - images/a_dot_ham.jpeg
 

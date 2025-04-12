@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:nsmhc/Controller/pref_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({ Key? key }) : super(key: key);
@@ -10,13 +12,15 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   
+  var _prefController = Get.put(PrefController());
+
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 3), () {
-      // prefController.cekLogin(context);
-      Navigator.pushReplacementNamed(context, '/welcome_screen');
+      _prefController.cekLogin(context);
+      // Navigator.pushReplacementNamed(context, '/welcome_screen');
     });
   }
 

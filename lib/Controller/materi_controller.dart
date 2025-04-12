@@ -11,9 +11,9 @@ class MateriController extends GetxController {
   final AudioPlayer _audio = AudioPlayer();
 
   Map<int, RxInt> map_target_mandiri = {
-    1 : 0.obs,
-    2 : 0.obs,
-    3 : 0.obs,
+    1 : 2.obs,
+    2 : 2.obs,
+    3 : 2.obs,
   };
 
   int get() => number_stage.value;
@@ -26,6 +26,7 @@ class MateriController extends GetxController {
    */
   void playAudio(String asset)async{
       // await _audio.play(AssetSource(asset));
+      
       
       await _audio.setSource(AssetSource(asset));
       await _audio.resume();

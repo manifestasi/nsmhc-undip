@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nsmhc/Utils/text_utils.dart';
 import 'package:nsmhc/Widgets/Forms/dropdown_field_custom.dart';
 import 'package:nsmhc/Widgets/Forms/text_field_custom.dart';
 
@@ -79,53 +80,53 @@ Widget FormAnak(BuildContext context,
                                    * Item SD
                                    */
           DropdownMenuItem(
-            value: "non",
+            value: TextUtilsData.pendidikan_items()[0],
             child: Text(
-              "Tidak Sekolah",
+              TextUtilsData.pendidikan_items()[0],
               style: TextStyle(
                   fontFamily: "Poppins", fontSize: 16.sp, color: Colors.black),
             ),
           ),
           /**
-                                   * Item SMP
-                                   */
+                                                                       * Item SMP
+                                                                       */
           DropdownMenuItem(
-            value: "SD",
+            value: TextUtilsData.pendidikan_items()[1],
             child: Text(
-              "SD / Setara",
+              TextUtilsData.pendidikan_items()[1],
               style: TextStyle(
                   fontFamily: "Poppins", fontSize: 16.sp, color: Colors.black),
             ),
           ),
           /**
-                                   * Item SMA/SMK
-                                   */
+                                                                       * Item SMA/SMK
+                                                                       */
           DropdownMenuItem(
-            value: "SMP",
+            value: TextUtilsData.pendidikan_items()[2],
             child: Text(
-              "SMP / Setara",
+              TextUtilsData.pendidikan_items()[2],
               style: TextStyle(
                   fontFamily: "Poppins", fontSize: 16.sp, color: Colors.black),
             ),
           ),
           /**
-                                   * Item Diploma
-                                   */
+                                                                       * Item Diploma
+                                                                       */
           DropdownMenuItem(
-            value: "SMA",
+            value: TextUtilsData.pendidikan_items()[3],
             child: Text(
-              "SMA / Setara",
+              TextUtilsData.pendidikan_items()[3],
               style: TextStyle(
                   fontFamily: "Poppins", fontSize: 16.sp, color: Colors.black),
             ),
           ),
           /**
-                                   * Item Sarjana
-                                   */
+                                                                       * Item Sarjana
+                                                                       */
           DropdownMenuItem(
-            value: "UNIV",
+            value: TextUtilsData.pendidikan_items()[4],
             child: Text(
-              "Perguruan Tinggi (D3, D4, S1, S2, S3)",
+              TextUtilsData.pendidikan_items()[4],
               style: TextStyle(
                   fontFamily: "Poppins", fontSize: 16.sp, color: Colors.black),
             ),

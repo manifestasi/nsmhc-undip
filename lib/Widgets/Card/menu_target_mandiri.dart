@@ -57,7 +57,7 @@ Widget TargetMandiriCard(BuildContext context, {
                                 side: BorderSide(
                                     color: Colors.white, width: 3.dm),
                                 borderRadius: BorderRadius.circular(20.dm)))),
-                    child: Text("Sudah")),
+                    child: Text("Ya")),
               ),
 
               SizedBox(
@@ -75,7 +75,7 @@ Widget TargetMandiriCard(BuildContext context, {
                                 side: BorderSide(
                                     color: Colors.white, width: 3.dm),
                                 borderRadius: BorderRadius.circular(20.dm)))),
-                    child: Text("Belum")),
+                    child: Text("Tidak")),
               )
 
             ],

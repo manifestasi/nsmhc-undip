@@ -1,7 +1,13 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:nsmhc/Controller/content_controller.dart';
+import 'package:nsmhc/Controller/materi_controller.dart';
+import 'package:nsmhc/Controller/pref_controller.dart';
 import 'package:nsmhc/Utils/text_utils.dart';
 import 'package:nsmhc/Widgets/Buttons/rounded_button.dart';
 import 'package:nsmhc/Widgets/Card/banner_home.dart';
@@ -14,6 +20,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var _contentController = Get.put(ContentController());
+  var _materiController = Get.put(MateriController());
+  var _prefController = Get.put(PrefController());
+
+  Future<void> saveTrack() async {
+    if (_contentController.is_tracked!.value == false) {
+      await _contentController.saveTrack().then((value) {
+        log("log track | $value");
+        _contentController.is_tracked!.value = true;
+      });
+    }
+  }
+
+
+  @override
+  void initState() {
+    log("stage : ${_prefController.getData("stage")}");
+    saveTrack();
+    _materiController.stopAudio();
+    _materiController.playAudio("audio/home.wav");
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -44,7 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 50.h,),
+                  padding: EdgeInsets.only(
+                    top: 50.h,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,15 +95,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left:30.w, bottom: 15.h),
-                            child: Text("Tahapan", style: TextStyle(
-                              fontFamily: "Poppins",
-                              fontSize: 18.sp, 
-                              fontWeight: FontWeight.bold, 
-                              color: Colors.white 
-                            ),),
-                          ),  
-
+                            padding: EdgeInsets.only(left: 30.w, bottom: 15.h),
+                            child: Text(
+                              "Tahapan",
+                              style: TextStyle(
+                                  fontFamily: "Poppins",
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
                           Padding(
                               padding: EdgeInsets.only(bottom: 140.h),
                               child: CarouselSlider.builder(
@@ -86,12 +118,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 itemBuilder: (_, index, page) {
                                   return BannerHome(context,
-                                      asset: TextUtilsData.banner_images()[index],
-                                      label: TextUtilsData.banner_labels()[index],
+                                      asset:
+                                          TextUtilsData.banner_images()[index],
+                                      label:
+                                          TextUtilsData.banner_labels()[index],
                                       width_box: 0.85,
                                       radius: 20.dm,
                                       height_img:
-                                          MediaQuery.of(context).size.height * 0.3,
+                                          MediaQuery.of(context).size.height *
+                                              0.3,
                                       width_img: 200.w);
                                 },
                               )),
@@ -103,55 +138,59 @@ class _HomeScreenState extends State<HomeScreen> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: DraggableScrollableSheet(
-                    minChildSize: 0.2,
-                    maxChildSize: 0.3,
-                    initialChildSize: 0.2,
-                    builder: (_, scroll){
-                      return Container(
-                        height: MediaQuery.of(context).size.height * 0.3,
-                        width: double.maxFinite,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10.dm), 
-                            topRight: Radius.circular(10.dm))
-                        ),
-                        child: SingleChildScrollView(
-                          controller: scroll,
-                          child: Column(
-                            children: [
-
-                              SizedBox(
-                                height: 20.h,
-                              ),  
-
-                              Text("Ayo Mulai!", 
-                              style: TextStyle(
-                                fontFamily: "Poppins", 
-                                fontSize: 18.sp, 
-                                fontWeight: FontWeight.bold,
-                                color: const Color.fromRGBO(185, 115, 69, 1),
-                              ),),
-                              SizedBox(height: 20.h),
-                            RoundedButton(
-                              context,
-                              is_border: true,
-                              onTap: () {
-                                Navigator.pushNamed(context, "/materi_screen");
-                              },
-                              text: "Mulai",
-                              shadow_color: Color.fromARGB(255, 159, 158, 158),
-                              color: const Color.fromRGBO(242, 162, 99, 1.0),
-                              fontSize: 18.sp,
-                              height_percent: 0.08,
-                              width_percent: 0.9,
-                              radius: 20.dm,
+                      minChildSize: 0.2,
+                      maxChildSize: 0.3,
+                      initialChildSize: 0.2,
+                      builder: (_, scroll) {
+                        return Container(
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10.dm),
+                                  topRight: Radius.circular(10.dm))),
+                          child: SingleChildScrollView(
+                            controller: scroll,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 20.h,
+                                ),
+                                Text(
+                                  "Ayo Mulai!",
+                                  style: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        const Color.fromRGBO(185, 115, 69, 1),
+                                  ),
+                                ),
+                                SizedBox(height: 20.h),
+                                RoundedButton(
+                                  context,
+                                  is_border: true,
+                                  onTap: () {
+                                    _materiController.stopAudio();
+                                    Navigator.pushNamed(
+                                        context, "/materi_screen");
+                                  },
+                                  text: "Mulai",
+                                  shadow_color:
+                                      Color.fromARGB(255, 159, 158, 158),
+                                  color:
+                                      const Color.fromRGBO(242, 162, 99, 1.0),
+                                  fontSize: 18.sp,
+                                  height_percent: 0.08,
+                                  width_percent: 0.9,
+                                  radius: 20.dm,
+                                ),
+                              ],
                             ),
-                            ],
                           ),
-                        ),
-                      );
-                    }),
+                        );
+                      }),
                 )
               ],
             ),

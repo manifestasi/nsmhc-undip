@@ -8,14 +8,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nsmhc/Pages/bottom_nav.dart';
 import 'package:nsmhc/Pages/data_anak_screen.dart';
 import 'package:nsmhc/Pages/data_diri_screen.dart';
-import 'package:nsmhc/Pages/data_suami_screen.dart';
 import 'package:nsmhc/Pages/edit_profile_screen.dart';
+import 'package:nsmhc/Pages/lisensi_screen.dart';
 // import 'package:nsmhc/Pages/home_screen.dart';
 import 'package:nsmhc/Pages/login_screen.dart';
 import 'package:nsmhc/Pages/materi_screen.dart';
 import 'package:nsmhc/Pages/profile_screen.dart';
 import 'package:nsmhc/Pages/register_screen.dart';
 import 'package:nsmhc/Pages/splash_screen.dart';
+import 'package:nsmhc/Pages/tentang_app.dart';
 import 'package:nsmhc/Pages/welcome_screen.dart';
 
 class Routers {
@@ -35,8 +36,10 @@ class Routers {
         return MaterialPageRoute(builder: (_)=> const EditProfileScreen());
       case "/data_diri_screen":
         return MaterialPageRoute(builder: (_)=> const DataDiriScreen());
-      case "/data_suami_screen":
-        return MaterialPageRoute(builder: (_)=> const DataSuamiScreen());
+      case "/tentang_screen":
+        return MaterialPageRoute(builder: (_)=> const TentangApp());
+      case "/lisensi_screen":
+        return MaterialPageRoute(builder: (_)=> const LisensiScreen());
       case "/data_anak_screen":
         return MaterialPageRoute(builder: (_)=> const DataAnakScreen());
       case "/home_screen":

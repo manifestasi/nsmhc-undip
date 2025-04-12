@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:nsmhc/Controller/auth_controller.dart';
+import 'package:nsmhc/Utils/text_utils.dart';
 import 'package:nsmhc/Widgets/Buttons/rounded_button.dart';
 import 'package:nsmhc/Widgets/Forms/dropdown_field_custom.dart';
 import 'package:nsmhc/Widgets/Forms/password_field_confirm.dart';
@@ -19,20 +23,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Rx<bool> is_visible_password = Rx<bool>(false);
   Rx<bool> is_visible_password_confirm = Rx<bool>(false);
   GlobalKey<FormState> global_key = GlobalKey<FormState>();
-  /**
-   * text editing controller
-   * 
-   */
-  var usernameController = TextEditingController();
-  var namaController = TextEditingController();
-  var usiaController = TextEditingController();
-  var passController = TextEditingController();
-  var confnameController = TextEditingController();
-  var alamatController = TextEditingController();
-  var hpController = TextEditingController();
 
-  var nama_anak_controller = TextEditingController();
-  var usia_anak_controller = TextEditingController();
+  var _authController = Get.put(AuthController());
+  RxBool? is_pressed = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -142,8 +135,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                            */
 
                                 TextFieldCustom(context,
-                                    text_controller: usernameController,
-                                    label: "Username",
+                                    text_controller:
+                                        _authController.emailController,
+                                    label: "Email",
                                     radius: 40.dm,
                                     width_percent: 0.9,
                                     border_color:
@@ -157,7 +151,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 Obx(() => PasswordFieldCustom(context,
                                     label: "Kata Sandi",
-                                    text_controller: passController,
+                                    text_controller:
+                                        _authController.passController,
                                     border_color:
                                         const Color.fromRGBO(185, 115, 69, 1),
                                     radius: 40.dm,
@@ -172,8 +167,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 Obx(() => PasswordFieldConfirm(context,
                                     label: "Konfirmasi Kata Sandi",
-                                    paired_text_controller: passController,
-                                    text_controller: confnameController,
+                                    paired_text_controller:
+                                        _authController.passController,
+                                    text_controller:
+                                        _authController.confnameController,
                                     border_color:
                                         const Color.fromRGBO(185, 115, 69, 1),
                                     radius: 40.dm,
@@ -189,7 +186,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                            */
 
                                 TextFieldCustom(context,
-                                    text_controller: namaController,
+                                    text_controller:
+                                        _authController.namaController,
                                     label: "Nama Lengkap",
                                     radius: 40.dm,
                                     width_percent: 0.9,
@@ -204,7 +202,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   height: 20.h,
                                 ),
                                 TextFieldCustom(context,
-                                    text_controller: usiaController,
+                                    text_controller:
+                                        _authController.usiaController,
                                     label: "Usia",
                                     radius: 40.dm,
                                     width_percent: 0.9,
@@ -225,12 +224,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   width_percent: 0.9,
                                   items: [
                                     /**
-                                   * Item SD
-                                   */
+                                                                   * Item SD
+                                                                   */
                                     DropdownMenuItem(
-                                      value: "non",
+                                      value:
+                                          TextUtilsData.pendidikan_items()[0],
                                       child: Text(
-                                        "Tidak Sekolah",
+                                        TextUtilsData.pendidikan_items()[0],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -238,12 +238,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                     /**
-                                   * Item SMP
-                                   */
+                                                                       * Item SMP
+                                                                       */
                                     DropdownMenuItem(
-                                      value: "SD",
+                                      value:
+                                          TextUtilsData.pendidikan_items()[1],
                                       child: Text(
-                                        "SD / Setara",
+                                        TextUtilsData.pendidikan_items()[1],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -251,12 +252,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                     /**
-                                   * Item SMA/SMK
-                                   */
+                                                                       * Item SMA/SMK
+                                                                       */
                                     DropdownMenuItem(
-                                      value: "SMP",
+                                      value:
+                                          TextUtilsData.pendidikan_items()[2],
                                       child: Text(
-                                        "SMP / Setara",
+                                        TextUtilsData.pendidikan_items()[2],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -264,12 +266,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                     /**
-                                   * Item Diploma
-                                   */
+                                                                       * Item Diploma
+                                                                       */
                                     DropdownMenuItem(
-                                      value: "SMA",
+                                      value:
+                                          TextUtilsData.pendidikan_items()[3],
                                       child: Text(
-                                        "SMA / Setara",
+                                        TextUtilsData.pendidikan_items()[3],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -277,12 +280,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                     /**
-                                   * Item Sarjana
-                                   */
+                                                                       * Item Sarjana
+                                                                       */
                                     DropdownMenuItem(
-                                      value: "UNIV",
+                                      value:
+                                          TextUtilsData.pendidikan_items()[4],
                                       child: Text(
-                                        "Perguruan Tinggi (D3, D4, S1, S2, S3)",
+                                        TextUtilsData.pendidikan_items()[4],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -290,7 +294,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                   ],
-                                  onChanged: (String? sr) {},
+                                  onChanged: (String? sr) {
+                                    _authController
+                                        .pendidikan_controller.value = sr!;
+                                  },
                                   label: 'Pendidikan Terakhir',
                                   radius: 40.dm,
                                   border_color:
@@ -309,12 +316,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   width_percent: 0.9,
                                   items: [
                                     /**
-                               * Item buruh
-                               */
+                                                               * Item buruh
+                                                               */
                                     DropdownMenuItem(
-                                      value: "BURUH",
+                                      value: TextUtilsData.pekerjaan_items()[0],
                                       child: Text(
-                                        "Buruh",
+                                        TextUtilsData.pekerjaan_items()[0],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -323,12 +330,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
 
                                     /**
-                               * Item KARYAWAN SWASTA
-                               */
+                                                               * Item KARYAWAN SWASTA
+                                                               */
                                     DropdownMenuItem(
-                                      value: "KARYAWAN",
+                                      value: TextUtilsData.pekerjaan_items()[1],
                                       child: Text(
-                                        "Karyawan Swasta",
+                                        TextUtilsData.pekerjaan_items()[1],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -336,12 +343,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                     /**
-                               * Item Wirausaha
-                               */
+                                                               * Item Wirausaha
+                                                               */
                                     DropdownMenuItem(
-                                      value: "WIRAUSAHA",
+                                      value: TextUtilsData.pekerjaan_items()[2],
                                       child: Text(
-                                        "Wiraswasta",
+                                        TextUtilsData.pekerjaan_items()[2],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -349,26 +356,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                     /**
-                               * Item PNS
-                               */
+                                                               * Item PNS
+                                                               */
                                     DropdownMenuItem(
-                                      value: "PNS",
+                                      value: TextUtilsData.pekerjaan_items()[3],
                                       child: Text(
-                                        "Pegawai Negeri",
-                                        style: TextStyle(
-                                            fontFamily: "Poppins",
-                                            fontSize: 16.sp,
-                                            color: Colors.black),
-                                      ),
-                                    ),
-
-                                    /**
-                               * Item Pejabat
-                               */
-                                    DropdownMenuItem(
-                                      value: "PEJABAT",
-                                      child: Text(
-                                        "Pejabat Pemerintah",
+                                        TextUtilsData.pekerjaan_items()[3],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -377,12 +370,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
 
                                     /**
-                               * Item S2
-                               */
+                                                               * Item Pejabat
+                                                               */
                                     DropdownMenuItem(
-                                      value: "non_work",
+                                      value: TextUtilsData.pekerjaan_items()[4],
                                       child: Text(
-                                        "Tidak Bekerja",
+                                        TextUtilsData.pekerjaan_items()[4],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -390,7 +383,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                   ],
-                                  onChanged: (String? sr) {},
+                                  onChanged: (String? sr) {
+                                    _authController.pekerjaan_controller.value =
+                                        sr!;
+                                  },
                                   label: 'Pekerjaan Terakhir',
                                   radius: 40.dm,
                                   border_color:
@@ -405,7 +401,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   height: 20.h,
                                 ),
                                 TextFieldCustom(context,
-                                    text_controller: alamatController,
+                                    text_controller:
+                                        _authController.alamatController,
                                     label: "Alamat",
                                     radius: 40.dm,
                                     width_percent: 0.9,
@@ -420,7 +417,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   height: 20.h,
                                 ),
                                 TextFieldCustom(context,
-                                    text_controller: hpController,
+                                    text_controller:
+                                        _authController.hpController,
                                     label: "No.Hp",
                                     radius: 40.dm,
                                     type: TextInputType.phone,
@@ -458,7 +456,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
                                   ),
                                 ),
-
                                 SizedBox(
                                   height: 20.h,
                                 ),
@@ -474,7 +471,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       */
 
                                 TextFieldCustom(context,
-                                    text_controller: nama_anak_controller,
+                                    text_controller:
+                                        _authController.nama_anak_controller,
                                     label: "Nama Lengkap",
                                     radius: 40.dm,
                                     width_percent: 0.9,
@@ -489,7 +487,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   height: 20.h,
                                 ),
                                 TextFieldCustom(context,
-                                    text_controller: usia_anak_controller,
+                                    text_controller:
+                                        _authController.usia_anak_controller,
                                     label: "Usia",
                                     radius: 40.dm,
                                     width_percent: 0.9,
@@ -510,12 +509,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   width_percent: 0.9,
                                   items: [
                                     /**
-                                   * Item SD
-                                   */
+                                                                   * Item SD
+                                                                   */
                                     DropdownMenuItem(
-                                      value: "non",
+                                      value:
+                                          TextUtilsData.pendidikan_items()[0],
                                       child: Text(
-                                        "Tidak Sekolah",
+                                        TextUtilsData.pendidikan_items()[0],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -523,12 +523,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                     /**
-                                   * Item SMP
-                                   */
+                                                                       * Item SMP
+                                                                       */
                                     DropdownMenuItem(
-                                      value: "SD",
+                                      value:
+                                          TextUtilsData.pendidikan_items()[1],
                                       child: Text(
-                                        "SD / Setara",
+                                        TextUtilsData.pendidikan_items()[1],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -536,12 +537,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                     /**
-                                   * Item SMA/SMK
-                                   */
+                                                                       * Item SMA/SMK
+                                                                       */
                                     DropdownMenuItem(
-                                      value: "SMP",
+                                      value:
+                                          TextUtilsData.pendidikan_items()[2],
                                       child: Text(
-                                        "SMP / Setara",
+                                        TextUtilsData.pendidikan_items()[2],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -549,12 +551,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                     /**
-                                   * Item Diploma
-                                   */
+                                                                       * Item Diploma
+                                                                       */
                                     DropdownMenuItem(
-                                      value: "SMA",
+                                      value:
+                                          TextUtilsData.pendidikan_items()[3],
                                       child: Text(
-                                        "SMA / Setara",
+                                        TextUtilsData.pendidikan_items()[3],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -562,12 +565,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                     /**
-                                   * Item Sarjana
-                                   */
+                                                                       * Item Sarjana
+                                                                       */
                                     DropdownMenuItem(
-                                      value: "UNIV",
+                                      value:
+                                          TextUtilsData.pendidikan_items()[4],
                                       child: Text(
-                                        "Perguruan Tinggi (D3, D4, S1, S2, S3)",
+                                        TextUtilsData.pendidikan_items()[4],
                                         style: TextStyle(
                                             fontFamily: "Poppins",
                                             fontSize: 16.sp,
@@ -575,7 +579,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                   ],
-                                  onChanged: (String? sr) {},
+                                  onChanged: (String? sr) {
+                                    _authController
+                                        .pendidikan_anak_controller.value = sr!;
+                                  },
                                   label: 'Pendidikan Terakhir',
                                   radius: 40.dm,
                                   border_color:
@@ -587,19 +594,84 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 SizedBox(
                                   height: 20.h,
                                 ),
-                                RoundedButton(
-                                  context,
-                                  shadow_color: Color.fromARGB(255, 198, 198, 198),
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, "/profile_screen");
-                                  },
-                                  text: "Register",
-                                  fontSize: 18.sp,
-                                  height_percent: 0.08,
-                                  width_percent: 0.9,
-                                  radius: 20.dm,
-                                ),
+                                Obx(() {
+                                  return (is_pressed!.value)
+                                      ? const CircularProgressIndicator(
+                                          color:
+                                              Color.fromRGBO(242, 162, 99, 1),
+                                        )
+                                      : RoundedButton(
+                                          context,
+                                          shadow_color: const Color.fromARGB(
+                                              255, 198, 198, 198),
+                                          onTap: () async {
+                                            /**
+                                             * 
+                                             * cek apakah field sudah terisi dengan benar.
+                                             */
+
+                                            if (global_key.currentState!
+                                                    .validate() ==
+                                                false) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                "Field tidak boleh kosong atau salah",
+                                                style: TextStyle(
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 12.sp,
+                                                ),
+                                              )));
+                                            } else {
+                                              /**
+                                               * jika field sudah benar, maka lakukan post ke API
+                                               * untuk registrasi akun.
+                                               *  */
+
+                                              is_pressed!.value = true;
+
+                                              await _authController
+                                                  .register()
+                                                  .then((value) {
+                                                is_pressed!.value = false;
+                                                log("iki register : $value");
+
+                                                if (value) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                          content: Text(
+                                                    "Berhasil Registrasi Akun baru!",
+                                                    style: TextStyle(
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 12.sp,
+                                                    ),
+                                                  )));
+
+                                                  Navigator
+                                                      .pushReplacementNamed(
+                                                          context,
+                                                          "/login_screen");
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                          content: Text(
+                                                    "Maaf, gagal registrasi!",
+                                                    style: TextStyle(
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 12.sp,
+                                                    ),
+                                                  )));
+                                                }
+                                              });
+                                            }
+                                          },
+                                          text: "Register",
+                                          fontSize: 18.sp,
+                                          height_percent: 0.08,
+                                          width_percent: 0.9,
+                                          radius: 20.dm,
+                                        );
+                                }),
                                 SizedBox(
                                   height: 20.h,
                                 ),
